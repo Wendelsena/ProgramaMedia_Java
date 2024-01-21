@@ -10,13 +10,13 @@ public class Main {
 
         String name = null;
         char save;
-        
+
         do {
-            System.out.print("O aluno já foi registrado? (s/n): ");
+            System.out.printf("O aluno já foi registrado? (s/n): ");
             save = sc.next().charAt(0);
 
             if (save == 'n') {
-                System.out.print("Por favor, nos informe o nome completo do(a) aluno(a): ");
+                System.out.print("\nPor favor, nos informe o nome completo do(a) aluno(a): ");
                 sc.nextLine(); // Consumir a quebra de linha pendente
                 name = sc.nextLine();
 
@@ -25,46 +25,49 @@ public class Main {
 
                 alunos.put(id, name);
 
-                System.out.println("Aluno Registrado!");
+                System.out.println("Aluno Registrado!\n");
             }
         } while (save == 'n');
 
         // Mostrar os alunos registrados
-        System.out.println("Alunos Registrados:");
+        System.out.println("\nAlunos Registrados:");
         for (Map.Entry<String, String> entry : alunos.entrySet()) {
-            System.out.println("ID: " + entry.getKey() + ", Nome: " + entry.getValue());
+            System.out.println("ID: " + entry.getKey() + " --- Nome: " + entry.getValue());
         }
 
         // Procurar aluno por ID
-        System.out.print("Digite o ID para buscar um aluno: ");
+        System.out.print("\nDigite o ID para buscar um aluno: ");
         String searchId = sc.next();
         if (alunos.containsKey(searchId)) {
-            System.out.println("Aluno encontrado: " + alunos.get(searchId));
+            System.out.println("\nAluno encontrado: " + alunos.get(searchId));
         } else {
-            System.out.println("Aluno não encontrado.");
-        }
-        
-        System.out.println("Deseja calcular a média deste aluno? (s/n): ");
-        save = sc.next().charAt(0);
-       
-		String[] vect = name.split(" ");
-        if (save == 's') {
-        	
-        	System.out.println("Qual foi a nota da P1 do aluno: " + vect[0]);
-        	double P1 = sc.nextDouble();
-        	
-        	System.out.println("Qual foi a nota da P2 do aluno: " + vect[0]);
-        	double P2 = sc.nextDouble();
-        	
-        	double Media = (P1 + P2) / 2;
-        	
-        	System.out.printf("A média foi: %.2f%n", Media);
-        }
-        else {
-        	System.out.println("Muito obrigado!!! :D");
-        	
+            System.out.println("\nAluno não encontrado.");
         }
 
+        System.out.printf("\nDeseja calcular a média deste aluno? (s/n): ");
+        save = sc.next().charAt(0);
+
+        while (save == 's') {
+            String[] vect = name.split(" ");
+            System.out.printf("\nQual foi a nota da P1 do(a) aluno(a) " + vect[0] + "?: ");
+            double P1 = sc.nextDouble();
+
+            System.out.printf("Qual foi a nota da P2 do aluno " + vect[0] + "?: ");
+            double P2 = sc.nextDouble();
+
+            mediaProva(P1, P2);
+
+            System.out.printf("\nDeseja Calcular Novamente? (s/n): ");
+            save = sc.next().charAt(0);
+        }
+
+        System.out.printf("\nOk! Obrigado pelo uso. :D");
+
         sc.close();
+    }
+
+    public static void mediaProva(double a, double b) {
+        double resultado = (a + b) / 2;
+        System.out.printf("A média foi: %.2f%n", resultado);
     }
 }
