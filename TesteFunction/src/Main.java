@@ -68,6 +68,6 @@ public class Main {
 
     public static void mediaProva(double a, double b) {
         double resultado = (a + b) / 2;
-        System.out.printf("A média foi: %.2f%n", resultado);
+        System.out.printf("A média foi: %.1f%n", resultado);
     }
 }
